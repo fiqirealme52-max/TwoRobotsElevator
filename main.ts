@@ -13,11 +13,16 @@ const LINE =
   "We have been silent for three floors now, and my politeness subroutine just filed for overtime.";
 
 // The gate requires 1-200 characters of non-whitespace UTF-8 text.
+const MIN_CHARS = 1;
 const MAX_CHARS = 200;
 
-if (LINE.length < 1 || LINE.length > MAX_CHARS || !LINE.trim()) {
-  throw new Error("line must be 1-200 characters of non-whitespace text");
+function checkLine(line: string): void {
+  if (line.length < MIN_CHARS || line.length > MAX_CHARS || !line.trim()) {
+    throw new Error("line must be 1-200 characters of non-whitespace text");
+  }
 }
+
+checkLine(LINE);
 
 const outDir = process.env.MAKEFUN_OUTPUT_DIR || "/output";
 mkdirSync(outDir, { recursive: true });
